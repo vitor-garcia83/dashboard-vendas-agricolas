@@ -1,6 +1,6 @@
 # 🌾 Dashboard de Performance Comercial - Safra 2024
 
-Este repositório contém um dashboard interativo desenvolvido no **Power BI** para análise de indicadores de vendas e faturamento no setor de agronegócio. O projeto simula a gestão de vendas de commodities e insumos agrícolas (Soja, Milho, Fertilizantes, etc.).
+Este repositório contém um dashboard interativo desenvolvido no **Power BI** para análise de indicadores de vendas no agronegócio, integrado a um modelo preditivo desenvolvido em **Python** para estimativa de faturamento.
 
 ---
 
@@ -12,7 +12,11 @@ Este repositório contém um dashboard interativo desenvolvido no **Power BI** p
 > [!TIP]
 > **[📄 Clique aqui para abrir o Relatório em PDF (Visualização Rápida)](docs/Relatorio_Performance_Agro.pdf)**
 
-### Detalhes e Filtros
+### Inteligência Preditiva (Python)
+![Gráfico de Regressão](screenshots/grafico_previsao.png)
+*Reta de regressão mostrando a correlação entre quantidade de sacas e faturamento estimado.*
+
+### Detalhes e Filtros do Dashboard
 <p align="center">
   <img src="screenshots/Captura%20de%20tela%202026-03-29%20165739.png" width="48%" />
   <img src="screenshots/Captura%20de%20tela%202026-03-29%20165619.png" width="48%" />
@@ -24,43 +28,41 @@ Este repositório contém um dashboard interativo desenvolvido no **Power BI** p
 
 ## 🚀 Objetivo do Projeto
 
-Transformar dados brutos de vendas provenientes de arquivos Excel em insights estratégicos. A ferramenta permite que gestores identifiquem rapidamente quais produtos são mais rentáveis e acompanhem a evolução das vendas por região e período temporal.
+Transformar dados brutos de vendas em insights estratégicos. O projeto une a clareza visual do Business Intelligence com o poder estatístico do Machine Learning para identificar produtos rentáveis e prever resultados financeiros.
 
 ## 🛠️ Tecnologias e Ferramentas
 
-* **Power BI Desktop**: Construção do dashboard e visualizações.
-* **Linguagem DAX**: Criação de medidas calculadas para faturamento e performance.
-* **Modelagem de Dados**: Estrutura em *Star Schema* (Esquema Estrela).
-* **Excel**: Fonte de dados para as tabelas Fato e Dimensões.
+* **Power BI Desktop**: Dashboard e visualizações interativas.
+* **Python (Pandas & Scikit-learn)**: Engenharia de dados e modelagem preditiva.
+* **Linguagem DAX**: Criação de medidas complexas de faturamento.
+* **Excel**: Armazenamento das tabelas Fato e Dimensões.
 
 ## 📊 Principais Funcionalidades
 
-* **KPI de Faturamento Total**: Indicador principal com o valor total convertido em R$.
-* **Análise por Categoria de Produto**: Gráfico de barras comparativo (ex: Fertilizante vs Soja).
-* **Sazonalidade (Timeline)**: Gráfico de linhas mostrando os picos de venda ao longo de 2024.
-* **Segmentação Regional**: Filtros interativos por Estado (BA, GO, MG, MT).
+* **KPIs Dinâmicos**: Acompanhamento em tempo real de faturamento e volume.
+* **Análise de Sazonalidade**: Identificação de picos de venda durante a safra.
+* **Segmentação Regional**: Filtros avançados por Estados e Categorias.
 
-## 🧠 Desafios Técnicos Superados
+## 🤖 Módulo de Machine Learning (Predictive Analytics)
 
-* **Modelagem Star Schema**: Relacionamento eficiente entre a tabela fato (`fVendas`) e as dimensões (`dProdutos`, `dClientes` e `dVendedores`).
-* **Medidas DAX**: Uso da função `SUMX` combinada com `RELATED` para cálculo de faturamento dinâmico:
-  
-  $$Total Faturamento = SUMX(fVendas, fVendas[Quantidade] * RELATED(dProdutos[Preço_Saca]))$$
-
-* **Design UI/UX**: Interface profissional com aplicação de sombras, cantos arredondados e paleta de cores personalizada para o setor agrícola.
+Utilizei a biblioteca **Scikit-learn** para treinar um modelo de Regressão Linear que estima o faturamento com base no volume de vendas (sacas):
+* **Métrica R² (Precisão):** 0.60
+* **Erro Médio Absoluto:** R$ 29.294,11
+* **Lógica aplicada:** O script realiza o merge entre as tabelas `fVendas` e `dProdutos` para calcular o faturamento real antes de treinar o modelo.
 
 ## 📁 Estrutura do Repositório
 
-* **/data**: Base de dados em Excel utilizada no projeto.
-* **/docs**: Relatório de visualização rápida em PDF.
-* **/screenshots**: Capturas de tela do dashboard.
+* **/data**: Base de dados `Dados_Dashboard_Agro.xlsx`.
+* **/docs**: Relatório `Relatorio_Performance_Agro.pdf`.
+* **/notebooks**: Script `previsao_faturamento.py`.
+* **/screenshots**: Capturas de tela e gráfico do modelo.
 * **Dashboard_Performance_Agro_2024.pbix**: Arquivo fonte do Power BI.
 
-## 📥 Como visualizar este projeto
+## 📥 Como visualizar
 
-1. Baixe o arquivo `Dashboard_Performance_Agro_2024.pbix` deste repositório.
-2. Certifique-se de ter o **Power BI Desktop** instalado.
-3. Abra o arquivo para interagir com os filtros e gráficos.
+1.  Clone o repositório ou baixe os arquivos.
+2.  Abra o arquivo `.pbix` no Power BI Desktop.
+3.  Para rodar a previsão, execute o script em `/notebooks` (requer Python 3.11+ e bibliotecas pandas/scikit-learn).
 
 ---
 **Desenvolvido por Vítor Hugo Sátiro** 🚀
